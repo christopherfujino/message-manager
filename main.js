@@ -40,7 +40,7 @@ function queryFileSystem() {
           let entry = {}
           let newPath = filepath + filename
           entry.path = newPath
-          if (path.extname(newPath).toLowerCase() !== '.mp3') {console.log(`${newPath} is not valid!`); return false}
+          if (path.extname(newPath).toLowerCase() !== '.mp3') {console.log(`File ${newPath} ignored.`); return false}
           entry.size = fs.statSync(newPath).size
           entry.time= new Date(fs.statSync(newPath).birthtime)
           shared.library.push(entry)
