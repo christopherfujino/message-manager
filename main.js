@@ -31,21 +31,19 @@ readConfig()  // immediately call this function, and read the config
 
 function queryFileSystem() {
   shared.library = [] // reinitialize library
-  shared.config.sources.forEach(function(filepath){
+  shared.config.sources.forEach(function(filepath){ // should force filepath to end in '/'
     fs.readdir(filepath, function(err, files) {
       if(err) {
         throw err
       } else {
         files.forEach(function(filename){
           let entry = {}
-          newPath = filepath + filename
+          let newPath = filepath + filename
           entry.path = newPath
-          console.log(newPath)
-          if (path.extname(newPath).toLowerCase() !== '.mp3') {return false}
+          if (path.extname(newPath).toLowerCase() !== '.mp3') {console.log(`${newPath} is not valid!`); return false}
           entry.size = fs.statSync(newPath).size
           entry.time= new Date(fs.statSync(newPath).birthtime)
           shared.library.push(entry)
-          console.log(entry)
         })
       }
     })
