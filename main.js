@@ -98,8 +98,7 @@ exports.get = function (property) {
   let value = shared[property]
   if (value) return value
   else {
-    console.log('error in main.js function get()')
-    console.log(property)
+    console.log(`error in passing "${property}" to main.js function get()`)
     return null
   }
 }
