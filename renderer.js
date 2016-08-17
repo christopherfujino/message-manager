@@ -21,7 +21,7 @@ function renderTable(where) {
         .append(`<td><button class='btn btn-mini btn-default'
           data-url='${ fileObject.path + fileObject.filename }'>
           <span class='icon icon-play'></span></button></td>`)
-        .append($('<td>').append(path.basename(fileObject.filename)))
+        .append($('<td>').append(path.basename(fileObject.path)))
         .append($('<td>').append(`
             ${['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
               [fileObject.time.getDay()]}
