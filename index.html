@@ -2,18 +2,57 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <title>Message Manager</title>
+    <link rel='stylesheet' type='text/css' href='./photon-0.1.2-alpha/dist/css/photon.min.css' />
+    <link rel='stylesheet' type='text/css' href='./style.css' />
   </head>
   <body>
-    <h1>Hello World!</h1>
     <!-- All of the Node.js APIs are available in this renderer process. -->
-    We are using node <script>document.write(process.versions.node)</script>,
-    Chromium <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
+  
+    <div class='window'>
+      <header class='toolbar toolbar-header draggable'>
+        <h1 class='title'>Message Manager</h1>
+        <div class='toolbar-actions'>
+          <div class='btn-group'>
+            <button class='btn btn-default'>All</button>
+            <button class='btn btn-default'>Sundays</button>
+            <button class='btn btn-default'>Wednesdays</button>
+          </div>
+          <button class='btn btn-default pull-right'><span class='icon icon-cog'></span></button>
+        </div>
+      </header>
+     
+      <div class='window-content'>
+        <div class='pane-group'>
+          <div class='pane-sm sidegroup'></div>
+
+          <div class='pane'>
+            <!-- Catalog -->
+            <table id='library' class='table-striped'>
+              <thead>
+                <th>Play</th>
+                <th>Filename</th>
+                <th>Date Created</th>
+                <th>File Size</th>
+              </thead>
+            </table>
+          </div>
+
+        </div>
+
+      </div>
+      
+      <footer class='toolbar toolbar-footer'>
+        <h1 class='title'>Footer</h1>
+      </footer>
+
+    </div>
+    
   </body>
 
   <script>
     // You can also require other files to run in this process
+    window.$ = window.jQuery = require(__dirname+'/jquery.js')
     require('./renderer.js')
   </script>
 </html>
