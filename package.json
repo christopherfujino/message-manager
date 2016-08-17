@@ -1,7 +1,7 @@
 {
-  "name": "electron-quick-start",
-  "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "name": "message-manager",
+  "version": "0.1.0",
+  "description": "for managing a database of sermons and transferring them to external media",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
@@ -11,17 +11,11 @@
     "url": "git+https://github.com/electron/electron-quick-start.git"
   },
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial"
+    "Electron"
   ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
-  "bugs": {
-    "url": "https://github.com/electron/electron-quick-start/issues"
-  },
-  "homepage": "https://github.com/electron/electron-quick-start#readme",
+  "author": "Christopher Fujino",
+  "license": "gpl-2.0",
+  "homepage": "https://github.com/christopherfujino/message-manager",
   "devDependencies": {
     "electron-prebuilt": "^1.2.0"
   },
