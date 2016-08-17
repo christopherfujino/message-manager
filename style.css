@@ -1,0 +1,3 @@
+.btn, .btn > * {
+  cursor: pointer;
+}
