@@ -3,7 +3,6 @@ const electron = require('electron')
 const {app, BrowserWindow, dialog} = require('electron')
 const fs = require('fs')  // native node.js module for file access
 const path = require('path')  // native node.js module for working with file paths
-// Module to create native browser window.
 const config = 'config.json'
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -112,6 +111,4 @@ exports.get = function (property) {
 exports.set = function (property, value) {
   shared[property] = value
 }
-
-//exports.queryDirectories = function() {}
 
