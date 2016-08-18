@@ -13,20 +13,30 @@ let filter = 'all'  // for filter buttons
 
 // render out table
 
+function getNiceTimeString(dateObject) {
+  let string = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][dateObject.getDay()] +
+    ' ' + (dateObject.getMonth() + 1) +
+    '/' + dateObject.getDate() +
+    '/' + dateObject.getFullYear()
+  return string
+}
+
 function renderTable(where) {
   $('tr').remove('.temp')
     
   api.get('library').forEach(function(fileObject){
-    $(where).append($('<tr>').addClass('temp')
-        .append(`<td><button class='btn btn-mini btn-default'
-          data-url='${ fileObject.path + fileObject.filename }'>
-          <span class='icon icon-play'></span></button></td>`)
-        .append($('<td>').append(path.basename(fileObject.path)))
-        .append($('<td>').append(`
-            ${['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-              [fileObject.time.getDay()]}
-            ${fileObject.time.getMonth()+1}/${fileObject.time.getDate()}/${fileObject.time.getFullYear()}`))
-        .append($('<td>').append(Math.floor(fileObject.size/1000)+ 'k'))
+    $(where).append(
+      $('<tr class=\'temp\'>')
+        .append(
+          $('<td>').append(
+            $('<button class=\'btn btn-mini btn-default\'>')
+              .data('url', fileObject.path)
+              .append('<span class=\'icon icon-play\'></span>')
+          )
+        )
+        .append(`<td>${path.basename(fileObject.path)}</td>`)
+        .append(`<td>${getNiceTimeString(fileObject.time)}</td>`)
+        .append(`<td>${Math.floor(fileObject.size/1000)}k</td>`)
         )
   })
 }
