@@ -41,9 +41,15 @@ function queryFileSystem() {
           let newPath = filepath + filename
           entry.path = newPath
           if (path.extname(newPath).toLowerCase() !== '.mp3') {console.log(`${newPath} is not valid!`); return false}
-          entry.size = fs.statSync(newPath).size
-          entry.time= new Date(fs.statSync(newPath).birthtime)
-          shared.library.push(entry)
+          fs.stat(newPath, function(err, stats){
+            if(err) {
+              console.log(err)
+              return false
+            }
+            entry.size = stats.size
+            entry.time = new Date(stats.birthtime)
+            shared.library.push(entry)
+          })
         })
       }
     })
