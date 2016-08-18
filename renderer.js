@@ -31,13 +31,16 @@ function renderTable(where) {
           $('<td>').append(
             $('<button class=\'btn btn-mini btn-default\'>')
               .data('url', fileObject.path)
+              .click(function(e){
+                console.log($(this).data('url'))
+              })
               .append('<span class=\'icon icon-play\'></span>')
           )
         )
-        .append(`<td>${path.basename(fileObject.path)}</td>`)
-        .append(`<td>${getNiceTimeString(fileObject.time)}</td>`)
-        .append(`<td>${Math.floor(fileObject.size/1000)}k</td>`)
-        )
+        .append(`<td>${path.basename(fileObject.path)}</td>\
+          <td>${getNiceTimeString(fileObject.time)}</td>\
+          <td>${Math.floor(fileObject.size/1000)}k</td>`)
+    )
   })
 }
 
