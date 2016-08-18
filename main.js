@@ -40,7 +40,7 @@ function queryFileSystem() {
           let entry = {}
           let newPath = filepath + filename
           entry.path = newPath
-          if (path.extname(newPath).toLowerCase() !== '.mp3') {console.log(`${newPath} is not valid!`); return false}
+          if (path.extname(newPath).toLowerCase() !== '.mp3') {console.log(`File ${newPath} ignored.`); return false}
           fs.stat(newPath, function(err, stats){
             if(err) {
               console.log(err)
@@ -104,8 +104,7 @@ exports.get = function (property) {
   let value = shared[property]
   if (value) return value
   else {
-    console.log('error in main.js function get()')
-    console.log(property)
+    console.log(`error in passing "${property}" to main.js function get()`)
     return null
   }
 }
