@@ -26,7 +26,7 @@ function renderTable(where) {
     
   api.get('library').forEach(function(fileObject){
     $(where).append(
-      $('<tr>')
+      $('<tr class=\'temp\'>')
         .append(
           $('<td>').append(
             $('<button class=\'btn btn-mini btn-default\'>')
