@@ -14,11 +14,11 @@ let filter = 'all'  // for filter buttons
 // render out table
 
 function getNiceTimeString(dateObject) {
-  let string = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][dateObject.getDay()] +
-    ' ' + (dateObject.getMonth() + 1) +
-    '/' + dateObject.getDate() +
-    '/' + dateObject.getFullYear()
-  return string
+  let day = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][dateObject.getDay()]
+  let month = dateObject.getMonth() + 1
+  let date = dateObject.getDate()
+  let year = (dateObject.getFullYear()+'').slice(2)
+  return `${day} ${month}/${date}/${year}`
 }
 
 function renderTable(where) {
