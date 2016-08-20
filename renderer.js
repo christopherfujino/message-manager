@@ -36,8 +36,11 @@ function renderTable (where) {
               .click(function (e) {
                 let $this = $(this)
                 let filepath = $this.data('url')
+                if ($this.children('span').hasClass('icon-play')) {  // if this isn't playing...
+                  console.log('hey')
+                  $('.icon-pause').toggleClass('icon-play icon-pause')
+                }
                 $this.children('span').toggleClass('icon-play icon-pause')
-//                console.log(filepath) // implement play code
                 mp3.play(filepath)
               })
               .append('<span class=\'icon icon-play\'></span>')
