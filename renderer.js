@@ -33,7 +33,7 @@ function renderTable (where) {
             $('<button class=\'btn btn-mini btn-default\'>')
               .data('url', fileObject.path)
               .click(function (e) {
-                console.log($(this).data('url'))
+                console.log($(this).data('url')) // implement play code
               })
               .append('<span class=\'icon icon-play\'></span>')
           )
