@@ -4,7 +4,8 @@
   "description": "for managing a database of sermons and transferring them to external media",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "standard": "./node_modules/standard/bin/cmd.js main.js renderer.js"
   },
   "repository": {
     "type": "git",
@@ -17,7 +18,8 @@
   "license": "gpl-2.0",
   "homepage": "https://github.com/christopherfujino/message-manager",
   "devDependencies": {
-    "electron-prebuilt": "^1.2.0"
+    "electron-prebuilt": "^1.2.0",
+    "standard": "^8.0.0-beta.5"
   },
   "dependencies": {
     "jquery": "^3.1.0"
