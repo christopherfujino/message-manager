@@ -6,6 +6,7 @@ const fs = require('fs')
 const path = require('path')
 const remote = require('electron').remote
 const api = remote.require('./main.js')
+window.$ = window.jQuery = require(__dirname+'/jquery.js')
 
 let sources = api.get('config').sources
 
