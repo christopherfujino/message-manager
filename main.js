@@ -3,6 +3,9 @@ const fs = require('fs')  // native node.js module for file access
 const path = require('path')  // native node.js module for working with file paths
 const config = 'config.json'
 
+const lame = require('lame')
+const Speaker = require('speaker')
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
@@ -113,3 +116,38 @@ exports.set = function (property, value) {
   shared[property] = value
 }
 
+exports.mp3Player = (function () {
+  let current = {
+    filepath : null,
+    state : 'paused',
+    stream : null
+  }
+  return {
+    play : function (filepath) {
+      // check for current stream
+      // if exists, resume
+      if (current.state === 'playing' && current.filepath === filepath) {
+        console.log(`Already playing file, so pausing.`)
+        current.stream.unpipe()
+        current.stream.state = 'paused'
+        return
+      }
+      if (current.state === 'playing' && current.filepath !== filepath) {
+        console.log(`Already playing a different file, unpiping ${current.filepath}`)
+        current.stream.unpipe()
+      }
+
+      // else, play
+      current.filepath = filepath
+      current.state = 'playing'
+      console.log(`Playing ${filepath}`)
+      current.stream = fs.createReadStream(filepath)
+      current.stream.pipe(new lame.Decoder())
+        .on('format', console.log)
+        .pipe(new Speaker())
+    },
+    pause : function (filepath) {
+      'hello, world!'
+    }
+  }
+})()

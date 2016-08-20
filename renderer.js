@@ -6,6 +6,7 @@
 const path = require('path')
 const remote = require('electron').remote
 const api = remote.require('./main.js')
+const mp3 = api.mp3Player
 window.$ = window.jQuery = require(`${__dirname}/jquery.js`)
 
 // let sources = api.get('config').sources
@@ -33,7 +34,11 @@ function renderTable (where) {
             $('<button class=\'btn btn-mini btn-default\'>')
               .data('url', fileObject.path)
               .click(function (e) {
-                console.log($(this).data('url')) // implement play code
+                let $this = $(this)
+                let filepath = $this.data('url')
+                $this.children('span').toggleClass('icon-play icon-pause')
+//                console.log(filepath) // implement play code
+                mp3.play(filepath)
               })
               .append('<span class=\'icon icon-play\'></span>')
           )
