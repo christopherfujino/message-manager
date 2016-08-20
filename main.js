@@ -1,5 +1,3 @@
-//const electron = require('electron')
-// Module to control application life.
 const {app, BrowserWindow, dialog} = require('electron')
 const fs = require('fs')  // native node.js module for file access
 const path = require('path')  // native node.js module for working with file paths
