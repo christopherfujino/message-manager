@@ -1,4 +1,4 @@
-const electron = require('electron')
+//const electron = require('electron')
 // Module to control application life.
 const {app, BrowserWindow, dialog} = require('electron')
 const fs = require('fs')  // native node.js module for file access
@@ -11,13 +11,13 @@ let mainWindow
 
 let shared = {} // these properties will be get-ted & set-ted from renderer.js
 
-function readConfig() {
-  fs.readFile(config, function(err, data) {
+function readConfig () {
+  fs.readFile(config, function (err, data) {
     data = JSON.parse(data)
     if (err) {
       console.log(err)
     } else {
-      shared.config = data  // as add more attributes to 
+      shared.config = data
     }
     queryFileSystem()
   })
@@ -28,20 +28,23 @@ readConfig()  // immediately call this function, and read the config
 // from https://nodejs.org/api/all.html#fs_fs_readdir_path_options_callback
 // fs.readdir(path[, options], callback)
 
-function queryFileSystem() {
+function queryFileSystem () {
   shared.library = [] // reinitialize library
-  shared.config.sources.forEach(function(filepath){ // should force filepath to end in '/'
-    fs.readdir(filepath, function(err, files) {
-      if(err) {
+  shared.config.sources.forEach(function (filepath) { // should force filepath to end in '/'
+    fs.readdir(filepath, function (err, files) {
+      if (err) {
         throw err
       } else {
-        files.forEach(function(filename){
+        files.forEach(function (filename) {
           let entry = {}
           let newPath = filepath + filename
           entry.path = newPath
-          if (path.extname(newPath).toLowerCase() !== '.mp3') {console.log(`File ${newPath} ignored.`); return false}
-          fs.stat(newPath, function(err, stats){
-            if(err) {
+          if (path.extname(newPath).toLowerCase() !== '.mp3') {
+            console.log(`File ${newPath} ignored.`)
+            return false
+          }
+          fs.stat(newPath, function (err, stats) {
+            if (err) {
               console.log(err)
               return false
             }
@@ -57,7 +60,7 @@ function queryFileSystem() {
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({frame:false})
+  mainWindow = new BrowserWindow({frame: false})
 
   // and load the index.html of the app.
   mainWindow.loadURL(`file://${__dirname}/index.html`)
