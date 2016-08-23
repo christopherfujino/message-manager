@@ -5,7 +5,8 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "standard": "./node_modules/standard/bin/cmd.js main.js renderer.js"
+    "standard": "standard --verbose main.js renderer.js; echo 'The End'",
+    "snazzy": "snazzy --verbose main.js renderer.js; echo 'The End'"
   },
   "repository": {
     "type": "git",
