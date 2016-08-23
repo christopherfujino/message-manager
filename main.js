@@ -118,16 +118,16 @@ exports.set = function (property, value) {
 
 exports.mp3Player = (function () {
   let current = {
-    filepath : null,
-    state : 'paused',
-    stream : null
+    filepath: null,
+    state: 'paused',
+    stream: null
   }
   return {
-    play : function (filepath) {
+    play: function (filepath) {
       // check for current stream
       // if exists, resume
       if (current.state === 'playing' && current.filepath === filepath) {
-        console.log(`Already playing file, so pausing.`)
+        console.log('Already playing file, so pausing.')
         current.stream.unpipe()
         current.stream.state = 'paused'
         return
@@ -146,7 +146,7 @@ exports.mp3Player = (function () {
         .on('format', console.log)
         .pipe(new Speaker())
     },
-    pause : function (filepath) {
+    pause: function (filepath) {
       'hello, world!'
     }
   }
