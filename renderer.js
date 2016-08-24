@@ -52,4 +52,10 @@ function renderTable (where) {
   })
 }
 
+function renderSidePane (where) {
+// temp
+  $(`${where} > ul > #external-media`).text('hello, world!')
+}
+
+renderSidePane('#side-pane')
 renderTable('#library')
