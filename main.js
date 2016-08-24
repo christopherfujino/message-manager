@@ -1,5 +1,6 @@
 const {app, BrowserWindow, dialog} = require('electron')
 const fs = require('fs')  // native node.js module for file access
+const {spawn} = require('child_process')
 const path = require('path')  // native node.js module for working with file paths
 const config = 'config.json'
 
@@ -76,6 +77,11 @@ function createWindow () {
     // when you should delete the corresponding element.
     mainWindow = null
   })
+}
+
+function queryDisks () {
+  // if os = os x
+    const diskutil = spawn('diskutil')
 }
 
 // This method will be called when Electron has finished
