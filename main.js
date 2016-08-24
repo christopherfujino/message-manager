@@ -120,19 +120,27 @@ exports.mp3Player = (function () {
   let current = {
     filepath: null,
     state: 'paused',
-    stream: null
+    stream: null,
+    speaker: null
   }
   return {
     play: function (filepath) {
+      'use strict';
       // check for current stream
       // if exists, resume
       if (current.state === 'playing' && current.filepath === filepath) {
         console.log('Already playing file, so pausing.')
-        current.stream.unpipe()
-        current.stream.state = 'paused'
+        console.log(current.state)
+        current.stream.unpipe(current.speaker)
+        current.state = 'paused'
         return
       }
-      if (current.state === 'playing' && current.filepath !== filepath) {
+      if (current.state === 'paused' && current.filepath === filepath) {
+        console.log('Resuming play of this file')
+        current.stream.pipe(current.speaker)
+        current.state = 'playing'
+        return
+      } else if (current.state === 'playing' && current.filepath !== filepath) {
         console.log(`Already playing a different file, unpiping ${current.filepath}`)
         current.stream.unpipe()
       }
@@ -142,9 +150,10 @@ exports.mp3Player = (function () {
       current.state = 'playing'
       console.log(`Playing ${filepath}`)
       current.stream = fs.createReadStream(filepath)
+      current.speaker = new Speaker()
       current.stream.pipe(new lame.Decoder())
         .on('format', console.log)
-        .pipe(new Speaker())
+        .pipe(current.speaker)
     },
     pause: function (filepath) {
       'hello, world!'
