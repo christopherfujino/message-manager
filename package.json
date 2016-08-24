@@ -17,7 +17,7 @@
     "Electron"
   ],
   "author": "Christopher Fujino",
-  "license": "gpl-2.0",
+  "license": "GPL-2.0",
   "homepage": "https://github.com/christopherfujino/message-manager",
   "devDependencies": {
     "electron-prebuilt": "^1.2.0",
