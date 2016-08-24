@@ -80,8 +80,19 @@ function createWindow () {
 }
 
 function queryDisks () {
-  // if os = os x
-    const diskutil = spawn('diskutil')
+  switch (process.platform) {
+    case 'linux':
+      break
+    case 'darwin':
+    // if os = os x
+    //const diskutil = spawn('diskutil', ['list'])
+    //or do this?
+    //const ls = spawn('ls', ['/dev/'])
+    
+    case 'win32':
+    //prob not gonna implement
+  }
+  
 }
 
 // This method will be called when Electron has finished
