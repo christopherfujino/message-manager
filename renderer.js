@@ -54,6 +54,7 @@ function renderTable (where) {
 
 function renderSidePane (where) {
 // temp
+  api.queryDisks()
   $(`${where} > ul > #external-media`).text('hello, world!')
 }
 
