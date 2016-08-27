@@ -2,7 +2,7 @@ const {app, BrowserWindow, dialog} = require('electron')
 const fs = require('fs')  // native node.js module for file access
 const {spawn} = require('child_process')
 const path = require('path')  // native node.js module for working with file paths
-const config = 'config.json'
+const configPath = 'config.json'
 
 const lame = require('lame')
 const Speaker = require('speaker')
@@ -13,15 +13,35 @@ let mainWindow
 
 let shared = {} // these properties will be get-ted & set-ted from renderer.js
 
+function copyFile (source, target) {  // from http://stackoverflow.com/questions/11293857/fastest-way-to-copy-file-in-node-js
+  return new Promise(function (resolve, reject) {
+    let read = fs.createReadStream(source)
+    read.on('error', reject)
+    let write = fs.createWriteStream(target)
+    write.on('error', reject)
+    write.on('finish', resolve)
+    read.pipe(write)
+  })
+}
+
 function readConfig () {
-  fs.readFile(config, function (err, data) {
-    data = JSON.parse(data)
+  fs.stat(configPath, function (err, stats) {
     if (err) {
       console.log(err)
     } else {
-      shared.config = data
+      if (!stats.isFile()) {  // no config...
+        copyFile(`${configPath}.example`, configPath)
+      }
+      fs.readFile(config, function (err, data) {
+        if (err) {
+          console.log(err)
+        } else {
+          data = JSON.parse(data)
+          shared.config = data
+        }
+        queryFileSystem()
+      })
     }
-    queryFileSystem()
   })
 }
 
@@ -82,13 +102,14 @@ function createWindow () {
 function queryDisks () {
   switch (process.platform) {
     case 'linux':
+      console.log(`You are using ${process.platform}.`)
       break
     case 'darwin':
     // if os = os x
     //const diskutil = spawn('diskutil', ['list'])
     //or do this?
     //const ls = spawn('ls', ['/dev/'])
-    
+      break
     case 'win32':
     //prob not gonna implement
   }
@@ -132,6 +153,10 @@ exports.get = function (property) {
 exports.set = function (property, value) {
   shared[property] = value
 }
+
+exports.queryFileSystem = queryFileSystem
+
+exports.queryDisks = queryDisks
 
 exports.mp3Player = (function () {
   let current = {
