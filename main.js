@@ -13,26 +13,15 @@ let mainWindow
 
 let shared = {} // these properties will be get-ted & set-ted from renderer.js
 
-function copyFile (source, target) {  // from http://stackoverflow.com/questions/11293857/fastest-way-to-copy-file-in-node-js
-  return new Promise(function (resolve, reject) {
-    let read = fs.createReadStream(source)
-    read.on('error', reject)
-    let write = fs.createWriteStream(target)
-    write.on('error', reject)
-    write.on('finish', resolve)
-    read.pipe(write)
-  })
-}
-
 function readConfig () {
   fs.stat(configPath, function (err, stats) {
     if (err) {
       console.log(err)
     } else {
       if (!stats.isFile()) {  // no config...
-        copyFile(`${configPath}.example`, configPath)
+        // implement code to create config file
       }
-      fs.readFile(config, function (err, data) {
+      fs.readFile(configPath, function (err, data) {
         if (err) {
           console.log(err)
         } else {
