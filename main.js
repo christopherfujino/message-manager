@@ -95,14 +95,13 @@ function queryDisks () {
       break
     case 'darwin':
     // if os = os x
-    //const diskutil = spawn('diskutil', ['list'])
-    //or do this?
-    //const ls = spawn('ls', ['/dev/'])
+    //  const diskutil = spawn('diskutil', ['list'])
+    //  or do this?
+    //  const ls = spawn('ls', ['/dev/'])
       break
     case 'win32':
-    //prob not gonna implement
+    //  prob not gonna implement
   }
-  
 }
 
 // This method will be called when Electron has finished
@@ -156,7 +155,7 @@ exports.mp3Player = (function () {
   }
   return {
     play: function (filepath) {
-      'use strict';
+      'use strict'
       // check for current stream
       // if exists, resume
       if (current.state === 'playing' && current.filepath === filepath) {
